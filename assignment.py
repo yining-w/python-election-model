@@ -4,8 +4,6 @@ Created on Mon Nov 23 09:48:38 2020
 
 @author: yinin
 """
-##ning note: need to finish dropping dataframes on line 37
-
 #data cite: https://apps.urban.org/features/state-economic-monitor/
 import pandas as pd
 import os
@@ -19,7 +17,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 
 
-def mergeCsv(urban_file, year_one, year_two): ##merge state level file from urban database with president file
+def merge_csv(urban_file, year_one, year_two): ##merge state level file from urban database with president file
     path = os.getcwd()
     files = os.listdir(path)
     files = [x for x in files if '.csv' in x]
@@ -58,7 +56,7 @@ df = mergeCsv('results', 2012, 2016)
 df.head()
     
 ## Your training data will be the first presidential election year, and your testing data will be the second.
-def divideSamples(df, year_one, year_two):
+def divide_samples(df, year_one, year_two):
     X = df.drop(['proportion', 'dem_win' ,'state', 'party', 'proportion'], axis =1)
     X = X.apply(pd.to_numeric)
     Y = df[['dem_win', 'year']]
@@ -83,7 +81,7 @@ X_train, X_test, Y_train, Y_test, = divideSamples(df, 2012, 2016)
      
 #Use a test harness to assess which model to use
 
-def testHarness():
+def test_harness():
     #cite: ML Lecture 1
     models = [('Dec Tree', DecisionTreeClassifier()), 
               ('Lin Disc', LinearDiscriminantAnalysis()),  ##different forms of predictors
@@ -105,7 +103,7 @@ testHarness()
 
 #Fit a supervised ML model (classification) to the data in that way that lets you make predictions,
 # then compare the predictions to the actual outcome.
-def predictModel(df, model_name, year_two):
+def predict_model(df, model_name, year_two):
     model = model_name
     model.fit(X_train, Y_train)
     predict = model.predict(X_test)
