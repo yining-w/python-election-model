@@ -52,7 +52,7 @@ def merge_csv(urban_file, year_one, year_two): ##merge state level file from urb
     return df 
          
   
-df = mergeCsv('results', 2012, 2016)
+df = merge_csv('results', 2012, 2016)
 df.head()
     
 ## Your training data will be the first presidential election year, and your testing data will be the second.
@@ -98,7 +98,7 @@ def test_harness():
         results.append((name, res_mean, res_std))
         print('Model:', name, 'Mean Accuracy Score:', res_mean, 'Std:', res_std)
 
-testHarness()
+test_harness()
 ##Results show Logistic Regression with highest accuracy score and lowest standard deviation.
 
 #Fit a supervised ML model (classification) to the data in that way that lets you make predictions,
@@ -117,7 +117,7 @@ def predict_model(df, model_name, year_two):
     compare['match'] = compare['match'].astype(int)
     return compare
     
-comparison = predictModel(df, LogisticRegression(), 2016)
+comparison = predict_model(df, LogisticRegression(), 2016)
 print(comparison)
 comparison.match.sum()
 ##32 out of 52 matches
